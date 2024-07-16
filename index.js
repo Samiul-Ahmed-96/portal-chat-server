@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
+import authRoutes from "./routes/AuthRoutes.js";
 
 
 dotenv.config();
@@ -21,9 +22,15 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
+app.use("/api/auth",authRoutes)
+
+
+
 const server = app.listen(port,()=>{
-    console.log(`Server running at ${port}`)
+    console.log(`Server running at http://localhost:${port}`)
 })
+
+
 
 mongoose.connect(databaseURL)
 .then(()=> console.log("DB Connected"))
